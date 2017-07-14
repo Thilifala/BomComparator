@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="foo/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="foo/easyui/themes/icon.css">
+    <!-- Insert this line above script imports  -->
+    <script>if(typeof module === 'object'){window.module = module;module=undefined;}</script>
+
+    <script type="text/javascript" src="foo/js/jquery.min.js"></script>
+    <script type="text/javascript" src="foo/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="src/js/compare.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if(window.module) module=window.module;</script>
+    <style>
+        h1{
+            text-align: center;
+        }
+        .table-box{
+            width:45%;
+            height:750px;
+            padding:0;
+            margin:20px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>树比较Test</h1>
+    <div class="table-box">
+        <table title="Folder Browser" id="treegrid1" class="easyui-treegrid" style="width:100%;height:100%;padding:0;margin:0;">
+            <thead>
+                <tr>
+                    <th data-options="field:'name'" width="220">Name</th>
+                    <th data-options="field:'size'" width="100" align="right">Size</th>
+                    <th data-options="field:'date'" width="150">Modified Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table-box">
+        <table title="Folder Browser" id="treegrid2" class="easyui-treegrid" style="width:100%;height:100%;padding:0;margin:0;" data-options="
+				url: 'mock/treegrid_data0.json',
+				method: 'get',
+				rownumbers: true,
+				idField: 'id',
+				treeField: 'name'
+			">
+            <thead>
+                <tr>
+                    <th data-options="field:'name'" width="220">Name</th>
+                    <th data-options="field:'size'" width="100" align="right">Size</th>
+                    <th data-options="field:'date'" width="150">Modified Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+</body>
+<script>
+    // require('./src/js/renderer.js')
+
+</script>
+
+</html>
