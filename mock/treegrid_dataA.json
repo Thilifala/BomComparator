@@ -7,7 +7,7 @@
         "children": [
             {
                 "id": 2,
-                "name": "机箱",
+                "name": "主机",
                 "size": "120 MB",
                 "date": "03/20/2010",
                 "children": [
@@ -34,26 +34,26 @@
                     },
                     {
                         "id": 22,
-                        "name": "MySQL",
+                        "name": "外壳",
                         "size": "",
                         "date": "01/13/2010",
                         "state": "closed",
                         "children": [
                             {
                                 "id": 221,
-                                "name": "my.ini",
+                                "name": "螺丝",
                                 "size": "10 KB",
                                 "date": "02/26/2009"
                             },
                             {
                                 "id": 222,
-                                "name": "my-huge.ini",
+                                "name": "机箱",
                                 "size": "5 KB",
                                 "date": "02/26/2009"
                             },
                             {
                                 "id": 223,
-                                "name": "my-large.ini",
+                                "name": "电源",
                                 "size": "5 KB",
                                 "date": "02/26/2009"
                             }
@@ -63,25 +63,25 @@
             },
             {
                 "id": 3,
-                "name": "eclipse",
+                "name": "外设",
                 "size": "",
                 "date": "01/20/2010",
                 "children": [
                     {
                         "id": 31,
-                        "name": "eclipse.exe",
+                        "name": "鼠标",
                         "size": "56 KB",
                         "date": "05/19/2009"
                     },
                     {
                         "id": 32,
-                        "name": "eclipse.ini",
+                        "name": "键盘",
                         "size": "1 KB",
                         "date": "04/20/2010"
                     },
                     {
                         "id": 33,
-                        "name": "notice.html",
+                        "name": "显示器",
                         "size": "7 KB",
                         "date": "03/17/2005"
                     }
