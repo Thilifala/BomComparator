@@ -16,6 +16,7 @@
         return Object.prototype.toString.call(o) == '[object Array]';
     };
 
+    //下一个没有增删标记的节点出队
     let shiftNode = function (queen) {
         if (!isArray(queen)) {
             console.error('invoke error:parameter is not right!');
@@ -36,6 +37,7 @@
         return null;
     };
 
+    //修改行样式
     let changeRowStyle = function (rowdata) {
         if (rowdata.compareRst === compareRst.add) {
             return 'background-color:lightgreen;color:blue;font-weight:bold;';
@@ -50,32 +52,56 @@
             return;
         }
     };
-    //A,B两树数据load完后加载界面，可用promise改良
+
+    //start:promise异步加载数据
+    let getLoadTreePromise = function (url) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                'url':url,
+                'method': 'get',
+                'success': function (data) {
+                    resolve(data);
+                },
+                'error': function (jqXHR, textStatus, errorThrown) {
+                    reject(textStatus);
+                }
+            });
+        })
+    }
+
     let loadTreeData = function () {
-        $.ajax({
-            'url': 'mock/treegrid_dataA.json',
-            'method': 'get',
-            'success': function (data) {
-                treedata.treeA = JSON.parse(data);
-                $.ajax({
-                    'url': 'mock/treegrid_dataB.json',
-                    'method': 'get',
-                    'success': function (data) {
-                        treedata.treeB = JSON.parse(data);
-                        if (treedata.treeA.length > 0 && treedata.treeB.length > 0) {
-                            compareNodes(treedata.treeA[0], treedata.treeB[0]);
-                        }
-                        initTree();
-                    }
-                })
+        //#region:promise异步加载数据
+        let promiseA = getLoadTreePromise('mock/treegrid_dataA.json');
+        let promiseB = getLoadTreePromise('mock/treegrid_dataB.json');
+        Promise.all([promiseA, promiseB]).then(function (dataArr) {
+            treedata.treeA = JSON.parse(dataArr[0]);
+            treedata.treeB = JSON.parse(dataArr[1]);
+        }).then(function () {
+            if (treedata.treeA.length > 0 && treedata.treeB.length > 0) {
+                compareNodes(treedata.treeA[0], treedata.treeB[0]);
             }
+            initTree();
+        }).catch(function (error) {
+            console.error(error);
         });
 
-    };
+        //方法二：
+        // promiseA.then(function (data) {
+        //     treedata.treeA = JSON.parse(data);
+        //     return getLoadTreePromise('mock/treegrid_dataB.json');
+        // }).then(function (data) {
+        //     treedata.treeB = JSON.parse(data);
+        //     if (treedata.treeA.length > 0 && treedata.treeB.length > 0) {
+        //         compareNodes(treedata.treeA[0], treedata.treeB[0]);
+        //     }
+        //     initTree();
+        // })
+        //#endregion:promise异步加载数据
+    }
+
 
     let initTree = function () {
         $('#treegrid1').treegrid({
-            // url: 'mock/treegrid_dataA.json',
             data: treedata.treeA,
             method: 'get',
             rownumbers: true,
@@ -86,7 +112,6 @@
             }
         });
         $('#treegrid2').treegrid({
-            // url: 'mock/treegrid_dataB.json',
             data: treedata.treeB,
             method: 'get',
             rownumbers: true,
@@ -97,6 +122,7 @@
             }
         });
     };
+
     //比较节点
     let compareNodes = function (nJsonA, nJsonB) {
         let queenA = [], queenB = [];
@@ -110,8 +136,8 @@
                 queenA = queenA.concat(sftNodeA.children);
                 queenB = queenB.concat(sftNodeB.children);
             }
-            console.log(sftNodeA.name);
         }
+        console.log('execute func : compareNodes');
     }
 
     //比较同层节点

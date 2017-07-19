@@ -3,3 +3,4 @@
 * electron
 * nodejs
 * treegrid(easyUI)
+* promise
