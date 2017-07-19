@@ -76,8 +76,10 @@
         Promise.all([promiseA, promiseB]).then(function (dataArr) {
             treedata.treeA = JSON.parse(dataArr[0]);
             treedata.treeB = JSON.parse(dataArr[1]);
-        }).then(function () {
-            if (treedata.treeA.length > 0 && treedata.treeB.length > 0) {
+            let canCompare = treedata.treeA.length > 0 && treedata.treeB.length > 0;
+            return canCompare;
+        }).then(function (canCompare) {
+            if (canCompare) {
                 compareNodes(treedata.treeA[0], treedata.treeB[0]);
             }
             initTree();
